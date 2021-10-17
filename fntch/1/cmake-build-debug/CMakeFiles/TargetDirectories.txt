@@ -1,0 +1,3 @@
+C:/prog/5term/fntch/1/cmake-build-debug/CMakeFiles/1.dir
+C:/prog/5term/fntch/1/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/prog/5term/fntch/1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
