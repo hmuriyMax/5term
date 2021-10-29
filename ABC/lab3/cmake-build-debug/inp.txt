@@ -1,0 +1,8 @@
+(((n(X) = Z) V (X + Y)) & (X + n(Y))) > Z
+(X > Y) > ((X > Z) > (X > Y & Z))
+n(((X + n(Y)) V (n(X) > Z)) & (Y / Z))
+((X / n(Y)) V n(X + Y) > n(n(Z) & X)) = Z
+(((n(X) > n(Z)) + (Y + Z)) & (n(Y) = Z)) / X
+(((X + n(Z)) & (X > n(Y))) V (n(X) > Y)) / n(Z)
+(((X > n(Y)) & (X / Z)) > n(X)) + n(X V Y)
+((X V Y & n(Z)) + (Y > Z > n(X))) > (X / n(Z))
