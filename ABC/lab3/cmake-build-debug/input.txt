@@ -9,3 +9,4 @@ n(((X + n(Y)) V (n(X) > Z)) & (Y / Z))
 ((())
 X - Y
 (K + L) V (L & K
+(X V n(Y)) & n(Z)

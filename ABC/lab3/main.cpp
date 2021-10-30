@@ -52,10 +52,6 @@ int getPriority (int (*lgt)(int l, int r)){
     return 6;
 }
 
-bool lftPriority(int (*lgt)(int l, int r), int (*rgt)(int l, int r)){
-    return getPriority(lgt) <= getPriority(rgt);
-}
-
 struct formula{
     formula* lhs = nullptr;
     formula* rhs = nullptr;
@@ -108,20 +104,9 @@ void multiStrip(string& str) {
 }
 
 bool TakesAll(string &str) {
-    int brcount = 0;
-    int i = -1;
-    for (auto el : str){
-        i++;
-        if (el == 'n')
-            continue;
-        if (el == '(')
-            brcount++;
-        if (el == ')')
-            brcount--;
-        if (brcount == 0 && i != str.length()-1)
-            return false;
-    }
-    return true;
+    string tmp = str;
+    tmp = tmp.substr(2, tmp.length()-3);
+    return CheckBr(tmp);
 }
 
 formula* getFormula(string& str){
@@ -232,9 +217,9 @@ void sumMap(int& num){
 }
 
 void printTable(ostream& out, string& str) {
+    out << "Formula: " << str << endl;
     auto f = getFormula(str);
     unsigned int num = perem.size();
-    out << "Formula: " << str << endl;
     for (auto el : perem){
         out << el.first <<" | ";
     }

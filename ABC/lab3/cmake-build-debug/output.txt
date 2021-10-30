@@ -20,7 +20,7 @@ X | Y | Z | res
 1 | 1 | 0 | 1
 1 | 1 | 1 | 1
 
-Formula: (((X + n(Y)) V (n(X) > Z)) & (Y / Z))
+Formula: n(((X + n(Y)) V (n(X) > Z)) & (Y / Z))
 X | Y | Z | res
 0 | 0 | 0 | 0
 0 | 0 | 1 | 0
@@ -86,6 +86,20 @@ X | Y | Z | res
 1 | 1 | 0 | 1
 1 | 1 | 1 | 1
 
+Formula: ((())
 Ошибка! operators not found!
+Formula: X - Y
 Ошибка! operators not found!
+Formula: (K + L) V (L & K
 Ошибка! ')' not found!
+Formula: (X V n(Y)) & n(Z)
+X | Y | Z | res
+0 | 0 | 0 | 1
+0 | 0 | 1 | 0
+0 | 1 | 0 | 0
+0 | 1 | 1 | 0
+1 | 0 | 0 | 1
+1 | 0 | 1 | 0
+1 | 1 | 0 | 1
+1 | 1 | 1 | 0
+
