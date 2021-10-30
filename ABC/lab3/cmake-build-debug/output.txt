@@ -88,10 +88,13 @@ X | Y | Z | res
 
 Formula: ((())
 Ошибка! operators not found!
+
 Formula: X - Y
 Ошибка! operators not found!
+
 Formula: (K + L) V (L & K
 Ошибка! ')' not found!
+
 Formula: (X V n(Y)) & n(Z)
 X | Y | Z | res
 0 | 0 | 0 | 1

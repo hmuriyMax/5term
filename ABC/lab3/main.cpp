@@ -8,8 +8,6 @@
 
 using namespace std;
 
-map<char, int*> perem;
-
 int notL(int l, int r = 0){
     return l==0 ? 1 : 0;
 }
@@ -86,7 +84,9 @@ bool CheckBr(const string& str){
         if (brcount < 0)
             return false;
     }
-    return brcount == 0;
+    if (brcount != 0)
+        return false;
+    return true;
 }
 
 void multiStrip(string& str) {
@@ -109,7 +109,7 @@ bool TakesAll(string &str) {
     return CheckBr(tmp);
 }
 
-formula* getFormula(string& str){
+formula* getFormula(string& str, map<char, int*>& perem){
     auto res = new formula;
     strip(str, ' ');
     if (str.length() == 1) {
@@ -126,7 +126,7 @@ formula* getFormula(string& str){
         if (str[0] != '(' || str[str.length()-1] != ')')
             throw "not found \"n(...)\" expression when tried to work with 'not' statement";
         string tmp = str.substr(1, str.length()-2);
-        res->lhs = getFormula(tmp);
+        res->lhs = getFormula(tmp, perem);
         return res;
     }
     vector<int (*)(int, int)> funcs;
@@ -192,7 +192,7 @@ formula* getFormula(string& str){
             break;
         }
     }
-    if (funcs.empty())
+    if (funcs.size() == 0)
         throw "operators not found!";
     res->fncPtr = funcs[i];
     string str1 = str;
@@ -200,12 +200,12 @@ formula* getFormula(string& str){
     string str2 = str.substr(position[i] + 1);
     multiStrip(str1);
     multiStrip(str2);
-    res->lhs = getFormula(str1);
-    res->rhs = getFormula(str2);
+    res->lhs = getFormula(str1, perem);
+    res->rhs = getFormula(str2, perem);
     return res;
 }
 
-void sumMap(int& num){
+void sumMap(int& num, map<char, int*>& perem){
     num++;
     int tmp = num;
     auto el = prev(perem.end());
@@ -217,15 +217,16 @@ void sumMap(int& num){
 }
 
 void printTable(ostream& out, string& str) {
+    map<char, int*> perem;
     out << "Formula: " << str << endl;
-    auto f = getFormula(str);
+    auto f = getFormula(str, perem);
     unsigned int num = perem.size();
     for (auto el : perem){
         out << el.first <<" | ";
     }
     out << "res" << endl;
     int n = 0;
-    for (int i = 0; i < pow(2, num); i++, sumMap(n)){
+    for (int i = 0; i < pow(2, num); i++, sumMap(n, perem)){
         for (auto el : perem){
             out << *el.second <<" | ";
         }
@@ -240,11 +241,10 @@ int main() {
     string formula;
     while (getline(in, formula)) {
         try {
-            perem.clear();
             printTable(out, formula);
         }
         catch (const char* ex) {
-            out << "Ошибка! " << ex << endl;
+            out << "Ошибка! " << ex << endl << endl;
         }
     }
     out.close();
