@@ -90,9 +90,7 @@ bool CheckBr(const string& str){
         if (brcount < 0)
             return false;
     }
-    if (brcount != 0)
-        return false;
-    return true;
+    return brcount == 0;
 }
 
 void multiStrip(string& str) {
@@ -209,7 +207,7 @@ formula* getFormula(string& str){
             break;
         }
     }
-    if (funcs.size() == 0)
+    if (funcs.empty())
         throw "operators not found!";
     res->fncPtr = funcs[i];
     string str1 = str;

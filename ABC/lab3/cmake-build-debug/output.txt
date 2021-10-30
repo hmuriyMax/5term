@@ -86,3 +86,6 @@ X | Y | Z | res
 1 | 1 | 0 | 1
 1 | 1 | 1 | 1
 
+Ошибка! operators not found!
+Ошибка! operators not found!
+Ошибка! ')' not found!

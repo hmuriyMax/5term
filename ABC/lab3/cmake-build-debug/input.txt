@@ -6,3 +6,6 @@ n(((X + n(Y)) V (n(X) > Z)) & (Y / Z))
 (((X + n(Z)) & (X > n(Y))) V (n(X) > Y)) / n(Z)
 (((X > n(Y)) & (X / Z)) > n(X)) + n(X V Y)
 ((X V Y & n(Z)) + (Y > Z > n(X))) > (X / n(Z))
+((())
+X - Y
+(K + L) V (L & K
