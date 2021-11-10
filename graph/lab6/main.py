@@ -8,11 +8,11 @@ from keras.models import Model
 
 #
 img_rows = img_cols = 28
-show_k = not True  # False True
-pred = not True
-mnist = True
+show_k = True  # False True
+pred = True
+mnist = not True
 pathToData = 'mnist/' if mnist else 'emnist/'
-num_classes = 10 if mnist else 26
+num_classes = 10 if mnist else 27
 epochs = 20
 fn_model = pathToData + 'lk3.h5'
 #
@@ -25,12 +25,17 @@ fn_val_loss = pathToHistory + 'val_loss_' + suff
 fn_val_acc = pathToHistory + 'val_acc_' + suff
 
 
-#
-def show_x(x, img_rows, img_cols, N):
+def ch(i):
+    return i if mnist else str(chr(ord('A')+i-1))
+
+
+def show_x(x, y, img_rows, img_cols, N):
     n = int(np.sqrt(N))
-    for i, j in enumerate(np.random.randint(1000, size=n * n)):
-        plt.subplot(n, n, i + 1)
+    plt.figure(figsize=(10,10))
+    for i, j in enumerate(np.random.randint(20800, size=n * n)):
+        plt.subplot(n, n, i+1)
         # Убираем 3-е измерение
+        plt.title(ch(y[j]))
         plt.imshow(x[j].reshape(img_rows, img_cols), cmap='gray')
         plt.axis('off')
     plt.show()
@@ -87,54 +92,8 @@ def loadBinData(pathToData, img_rows, img_cols):
 # Загружаются изображения и их метки
 x_train, y_train, x_test, y_test = loadBinData(pathToData, img_rows, img_cols)
 if show_k:
-    show_x(x_test, img_rows, img_cols, 16)
-    exit()
-if pred:
-    from keras.models import load_model
+    show_x(x_test, np.array([np.argmax(m) for m in y_test]), img_rows, img_cols, 25)
 
-    model = load_model(fn_model)
-    # Оценка модели НС на тестовых данных
-    score = model.evaluate(x_test, y_test, verbose=0)
-    # Вывод потерь и точности
-    print('Потери при тестировании:', round(score[0], 4))
-    print('Точность при тестировании: {}{}'.format(score[1] * 100, '%'))
-    # Прогноз
-    y_pred = model.predict(x_test)
-    # print(y_pred[0])
-    # print(y_test[0])
-    # [6.8e-6 1.5e-10 7.6e-6 1.5e-3 7.0e-9 6.2e-5 2.2e-11 9.9e-1 3.0e-7 5.9e-6]
-    # [0.     0.      0.     0.     0.     0.     0.      1.     0.     0.]
-    # Заносим в массив predicted_classes метки классов, предсказанных моделью НС
-    predicted_classes = np.array([np.argmax(m) for m in y_pred])
-    true_classes = np.array([np.argmax(m) for m in y_test])
-    n_test = len(y_test)
-    # Число верно классифицированных изображений
-    true_classified = np.sum(predicted_classes == true_classes)
-    # Число ошибочно классифицированных изображений
-    false_classified = n_test - true_classified
-    acc = 100.0 * true_classified / n_test
-    print('Точность: {}{}'.format(acc, '%'))
-    print('Неверно классифицированно:', false_classified)
-    m, m_max = 0, 15
-    lst_false = []
-    print('Индекс | Прогноз | Правильный класс')
-    for i in range(n_test):
-        cls_pred = predicted_classes[i]  # Предсказанное моделью имя класса
-        cls_true = true_classes[i]  # Истинное имя класса
-        if cls_pred != cls_true:
-            m += 1
-            lst_false.append([i, cls_pred, cls_true])
-            if (m == min(m_max, false_classified)): break
-            print('  {}   |   {}    |    {}'.format(i, cls_pred, cls_true))
-    plt.figure('Ошибки классификации')
-    for k in range(len(lst_false)):
-        plt.subplot(3, 5, k + 1)
-        lst = lst_false[k]
-        plt.imshow(x_test[lst[0]].reshape(img_rows, img_cols), cmap='gray')
-        plt.title('{}/{}'.format(lst[1], lst[2]))
-        plt.axis('off')
-    plt.show()
-    exit()
 #
 # Определяем форму входных данных
 input_shape = (img_rows, img_cols)
