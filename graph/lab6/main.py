@@ -12,7 +12,7 @@ show_k = True  # False True
 pred = True
 mnist = not True
 pathToData = 'mnist/' if mnist else 'emnist/'
-num_classes = 10 if mnist else 27
+num_classes = 10 if mnist else 26
 epochs = 20
 fn_model = pathToData + 'lk3.h5'
 #
@@ -73,6 +73,9 @@ def loadBinData(pathToData, img_rows, img_cols):
     with open(pathToData + 'labelsTest.bin', 'rb') as read_binary:
         y_test = np.fromfile(read_binary, dtype=np.uint8)
     # Преобразование целочисленных данных в float32 и нормализация; данные лежат в диапазоне [0.0, 1.0]
+    if not mnist:
+        y_train -= 1
+        y_test -= 1
     x_train = np.array(x_train, dtype='float32') / 255
     x_test = np.array(x_test, dtype='float32') / 255
     x_train = x_train.reshape(-1, img_rows, img_cols)
