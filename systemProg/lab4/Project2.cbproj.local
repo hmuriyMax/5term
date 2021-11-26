@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>1899.12.30 00:00:00.000.074,C:\Users\Максим\Documents\Embarcadero\Studio\Projects\Unit3.cpp=C:\prog\5term\systemProg\lab4\Unit3.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.193,=C:\Users\Максим\Documents\Embarcadero\Studio\Projects\Unit3.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.074,C:\Users\Максим\Documents\Embarcadero\Studio\Projects\Unit3.h=C:\prog\5term\systemProg\lab4\Unit3.h</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.802,C:\Users\Максим\Documents\Embarcadero\Studio\Projects\Project2.cbproj=C:\prog\5term\systemProg\lab4\Project2.cbproj</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.074,C:\Users\Максим\Documents\Embarcadero\Studio\Projects\Unit3.dfm=C:\prog\5term\systemProg\lab4\Unit3.dfm</Transaction>
     <Transaction>1899.12.30 00:00:00.000.783,=C:\Users\Максим\Documents\Embarcadero\Studio\Projects\Project2PCH1.h</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.110,C:\Users\Максим\Documents\Embarcadero\Studio\Projects\Project2PCH1.h=C:\prog\5term\systemProg\lab4\Project2PCH1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.110,C:\prog\5term\systemProg\lab4\Project2PCH1.h=C:\Users\Максим\Documents\Embarcadero\Studio\Projects\Project2PCH1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.074,C:\prog\5term\systemProg\lab4\Unit3.cpp=C:\Users\Максим\Documents\Embarcadero\Studio\Projects\Unit3.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.193,=C:\Users\Максим\Documents\Embarcadero\Studio\Projects\Unit3.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.074,C:\prog\5term\systemProg\lab4\Unit3.dfm=C:\Users\Максим\Documents\Embarcadero\Studio\Projects\Unit3.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.074,C:\prog\5term\systemProg\lab4\Unit3.h=C:\Users\Максим\Documents\Embarcadero\Studio\Projects\Unit3.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.802,C:\prog\5term\systemProg\lab4\Project2.cbproj=C:\Users\Максим\Documents\Embarcadero\Studio\Projects\Project2.cbproj</Transaction>
   </Transactions>
 </BorlandProject>

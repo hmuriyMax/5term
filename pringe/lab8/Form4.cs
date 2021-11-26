@@ -26,10 +26,10 @@ namespace lab8
                 if (el.num_studs > max)
                     max = el.num_studs;
 
+            var tmp2 = f1.lst.Where(el => el.num_studs == max);
             List<row> tmp = new List<row>();
-            foreach (row el in f1.lst)
-                if (el.num_studs == max)
-                    tmp.Add(el);
+            foreach (row el in tmp2)
+                tmp.Add(el);
 
             f1.FromListToDT(ref tmp, dataGridView1);
         }

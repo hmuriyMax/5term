@@ -1,0 +1,9 @@
+﻿  Lab5.cpp
+C:\prog\5term\systemProg\lab5\Lab5.cpp(164,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\prog\5term\systemProg\lab5\Lab5.cpp(189,13): warning C4244: инициализация: преобразование "int" в "float", возможна потеря данных
+C:\prog\5term\systemProg\lab5\Lab5.cpp(247,38): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\prog\5term\systemProg\lab5\Lab5.cpp(259,43): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\prog\5term\systemProg\lab5\Lab5.cpp(259,24): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\prog\5term\systemProg\lab5\Lab5.cpp(343,9): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\prog\5term\systemProg\lab5\Lab5.cpp(344,9): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+  lab5.vcxproj -> C:\prog\5term\systemProg\lab5\Debug\lab5.exe
