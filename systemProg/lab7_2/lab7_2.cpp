@@ -18,6 +18,7 @@ BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 HBITMAP hBackImg, hTextImg;
 HWND hAnimateButton, hMetaButton; 
 WCHAR button1Title[MAX_LOADSTRING], button2Title[MAX_LOADSTRING], button3Title[MAX_LOADSTRING];
@@ -28,6 +29,8 @@ bool DoTask1 = false, DoTask2 = false;
 int coordX = 400, coordY = 200;
 int i = 3, j = 1;
 =======
+=======
+>>>>>>> Stashed changes
 HBITMAP hImg1, hImg2;
 HWND hButton1, hButton2; 
 WCHAR button1Title[MAX_LOADSTRING], button2Title[MAX_LOADSTRING], button3Title[MAX_LOADSTRING];
@@ -37,6 +40,9 @@ RECT back_rect = { 0, 40, 536, 733 };
 bool DoTask1 = false, DoTask2 = false;
 int ball_x_coordinate = 500, ball_y_coordinate = 600;
 int i = 5, j = -10;
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
@@ -56,9 +62,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     LoadStringW(hInstance, IDS_BUTTON2_TITLE, button2Title, MAX_LOADSTRING);
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     hBackImg = LoadBitmapW(hInstance, MAKEINTRESOURCE(IDB_BITMAP1));
     hTextImg = LoadBitmapW(hInstance, MAKEINTRESOURCE(IDB_BITMAP2));
 
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
     MyRegisterClass(hInstance);
@@ -130,7 +139,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
     hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         CW_USEDEFAULT, 0, 1015, 765, nullptr, nullptr, hInstance, nullptr);
+=======
+        CW_USEDEFAULT, 0, 551, 788, nullptr, nullptr, hInstance, nullptr);
+>>>>>>> Stashed changes
 =======
         CW_USEDEFAULT, 0, 551, 788, nullptr, nullptr, hInstance, nullptr);
 >>>>>>> Stashed changes
@@ -141,12 +154,15 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     hAnimateButton = CreateWindowEx(WS_EX_CLIENTEDGE, _T("BUTTON"), button1Title, WS_BORDER | WS_VISIBLE | WS_CHILD,
         10, 12, 80, 25, hWnd, (HMENU)IDC_BUTTON1, hInstance, nullptr);
     hMetaButton = CreateWindowEx(WS_EX_CLIENTEDGE, _T("BUTTON"), button2Title, WS_BORDER | WS_VISIBLE | WS_CHILD,
         10 + 90, 12, 80, 25, hWnd, (HMENU)IDC_BUTTON2, hInstance, nullptr);
 
 =======
+=======
+>>>>>>> Stashed changes
     hButton1 = CreateWindowEx(WS_EX_CLIENTEDGE, _T("BUTTON"), button1Title, WS_BORDER | WS_VISIBLE | WS_CHILD,
         10, 12, 80, 25, hWnd, (HMENU)IDC_BUTTON1, hInstance, nullptr);
     hButton2 = CreateWindowEx(WS_EX_CLIENTEDGE, _T("BUTTON"), button2Title, WS_BORDER | WS_VISIBLE | WS_CHILD,
@@ -154,6 +170,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
     hImg1 = LoadBitmapW(hInstance, MAKEINTRESOURCE(IDB_BITMAP1));
     hImg2 = LoadBitmapW(hInstance, MAKEINTRESOURCE(IDB_BITMAP2));
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
     ShowWindow(hWnd, nCmdShow);
@@ -163,6 +182,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     return TRUE;
 }
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 void Task1() {
     HDC hdc = GetDC(hWnd);
@@ -195,6 +215,10 @@ void Task3() {
 void upd() {
     InvalidateRect(hWnd, &back_rect, false);
 >>>>>>> Stashed changes
+=======
+void upd() {
+    InvalidateRect(hWnd, &back_rect, false);
+>>>>>>> Stashed changes
 }
 
 //
@@ -219,6 +243,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             {
             case IDC_BUTTON1:
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                 SetTimer(hWnd, 66, 1, (TIMERPROC)&Task1);
                 break;
             case IDC_BUTTON2:
@@ -226,6 +251,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 InvalidateRect(hWnd, 0, true);
                 Task3();
 =======
+=======
+>>>>>>> Stashed changes
                 DoTask1 = true;
                 DoTask2 = false;
                 SetTimer(hWnd, 333, 10, (TIMERPROC(upd)));
@@ -235,6 +262,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 DoTask1 = false;
                 KillTimer(hWnd, 333);
                 InvalidateRect(hWnd, 0, true);
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
                 break;
             case IDM_ABOUT:
@@ -253,8 +283,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 =======
+=======
+>>>>>>> Stashed changes
             if (DoTask1) {
                 HDC hdc = GetDC(hWnd);
                 HDC hdcImg = CreateCompatibleDC(hdc);
@@ -290,6 +323,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 Rectangle(hDC, 100, 310, 300, 250);
                 CloseMetaFile(hDC);
             }
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
             EndPaint(hWnd, &ps);
         }
