@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.087,C:\Users\kostj\Documents\Embarcadero\Studio\Projects\Unit1.h=C:\Users\kostj\Desktop\Прога 5 сем\Системное программирование\Lab4\Unit1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.988,=C:\Users\kostj\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.457,C:\Users\kostj\Documents\Embarcadero\Studio\Projects\Project1PCH1.h=C:\Users\kostj\Desktop\Прога 5 сем\Системное программирование\Lab4\Lab4PCH1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.087,C:\Users\kostj\Documents\Embarcadero\Studio\Projects\Unit1.cpp=C:\Users\kostj\Desktop\Прога 5 сем\Системное программирование\Lab4\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.087,C:\Users\kostj\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\kostj\Desktop\Прога 5 сем\Системное программирование\Lab4\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.339,C:\Users\kostj\Documents\Embarcadero\Studio\Projects\Project1.cbproj=C:\Users\kostj\Desktop\Прога 5 сем\Системное программирование\Lab4\Lab4.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.746,=C:\Users\kostj\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+  </Transactions>
+</BorlandProject>

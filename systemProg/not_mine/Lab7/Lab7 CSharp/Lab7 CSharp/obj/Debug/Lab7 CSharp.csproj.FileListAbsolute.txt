@@ -1,0 +1,20 @@
+C:\Users\kostj\Desktop\Lab7 CSharp\Lab7 CSharp\bin\Debug\Lab7 CSharp.exe.config
+C:\Users\kostj\Desktop\Lab7 CSharp\Lab7 CSharp\bin\Debug\Lab7 CSharp.exe
+C:\Users\kostj\Desktop\Lab7 CSharp\Lab7 CSharp\bin\Debug\Lab7 CSharp.pdb
+C:\Users\kostj\Desktop\Lab7 CSharp\Lab7 CSharp\obj\Debug\Lab7 CSharp.csprojAssemblyReference.cache
+C:\Users\kostj\Desktop\Lab7 CSharp\Lab7 CSharp\obj\Debug\Lab7_CSharp.Form1.resources
+C:\Users\kostj\Desktop\Lab7 CSharp\Lab7 CSharp\obj\Debug\Lab7_CSharp.Properties.Resources.resources
+C:\Users\kostj\Desktop\Lab7 CSharp\Lab7 CSharp\obj\Debug\Lab7 CSharp.csproj.GenerateResource.cache
+C:\Users\kostj\Desktop\Lab7 CSharp\Lab7 CSharp\obj\Debug\Lab7 CSharp.csproj.CoreCompileInputs.cache
+C:\Users\kostj\Desktop\Lab7 CSharp\Lab7 CSharp\obj\Debug\Lab7 CSharp.exe
+C:\Users\kostj\Desktop\Lab7 CSharp\Lab7 CSharp\obj\Debug\Lab7 CSharp.pdb
+C:\prog\5term\systemProg\not_mine\Lab7\Lab7 CSharp\Lab7 CSharp\bin\Debug\Lab7 CSharp.exe.config
+C:\prog\5term\systemProg\not_mine\Lab7\Lab7 CSharp\Lab7 CSharp\bin\Debug\Lab7 CSharp.exe
+C:\prog\5term\systemProg\not_mine\Lab7\Lab7 CSharp\Lab7 CSharp\bin\Debug\Lab7 CSharp.pdb
+C:\prog\5term\systemProg\not_mine\Lab7\Lab7 CSharp\Lab7 CSharp\obj\Debug\Lab7 CSharp.csproj.AssemblyReference.cache
+C:\prog\5term\systemProg\not_mine\Lab7\Lab7 CSharp\Lab7 CSharp\obj\Debug\Lab7_CSharp.Form1.resources
+C:\prog\5term\systemProg\not_mine\Lab7\Lab7 CSharp\Lab7 CSharp\obj\Debug\Lab7_CSharp.Properties.Resources.resources
+C:\prog\5term\systemProg\not_mine\Lab7\Lab7 CSharp\Lab7 CSharp\obj\Debug\Lab7 CSharp.csproj.GenerateResource.cache
+C:\prog\5term\systemProg\not_mine\Lab7\Lab7 CSharp\Lab7 CSharp\obj\Debug\Lab7 CSharp.csproj.CoreCompileInputs.cache
+C:\prog\5term\systemProg\not_mine\Lab7\Lab7 CSharp\Lab7 CSharp\obj\Debug\Lab7 CSharp.exe
+C:\prog\5term\systemProg\not_mine\Lab7\Lab7 CSharp\Lab7 CSharp\obj\Debug\Lab7 CSharp.pdb

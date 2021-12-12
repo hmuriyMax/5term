@@ -1,0 +1,20 @@
+C:\Users\kostj\Desktop\Lab8\Lab8\bin\Debug\Lab8.exe.config
+C:\Users\kostj\Desktop\Lab8\Lab8\bin\Debug\Lab8.exe
+C:\Users\kostj\Desktop\Lab8\Lab8\bin\Debug\Lab8.pdb
+C:\Users\kostj\Desktop\Lab8\Lab8\obj\Debug\Lab8.csprojAssemblyReference.cache
+C:\Users\kostj\Desktop\Lab8\Lab8\obj\Debug\Lab8.Form1.resources
+C:\Users\kostj\Desktop\Lab8\Lab8\obj\Debug\Lab8.Properties.Resources.resources
+C:\Users\kostj\Desktop\Lab8\Lab8\obj\Debug\Lab8.csproj.GenerateResource.cache
+C:\Users\kostj\Desktop\Lab8\Lab8\obj\Debug\Lab8.csproj.CoreCompileInputs.cache
+C:\Users\kostj\Desktop\Lab8\Lab8\obj\Debug\Lab8.exe
+C:\Users\kostj\Desktop\Lab8\Lab8\obj\Debug\Lab8.pdb
+C:\Users\kostj\Desktop\Прога 5 сем\Системное программирование\Lab8\Lab8\bin\Debug\Lab8.exe.config
+C:\Users\kostj\Desktop\Прога 5 сем\Системное программирование\Lab8\Lab8\bin\Debug\Lab8.exe
+C:\Users\kostj\Desktop\Прога 5 сем\Системное программирование\Lab8\Lab8\bin\Debug\Lab8.pdb
+C:\Users\kostj\Desktop\Прога 5 сем\Системное программирование\Lab8\Lab8\obj\Debug\Lab8.csprojAssemblyReference.cache
+C:\Users\kostj\Desktop\Прога 5 сем\Системное программирование\Lab8\Lab8\obj\Debug\Lab8.Form1.resources
+C:\Users\kostj\Desktop\Прога 5 сем\Системное программирование\Lab8\Lab8\obj\Debug\Lab8.Properties.Resources.resources
+C:\Users\kostj\Desktop\Прога 5 сем\Системное программирование\Lab8\Lab8\obj\Debug\Lab8.csproj.GenerateResource.cache
+C:\Users\kostj\Desktop\Прога 5 сем\Системное программирование\Lab8\Lab8\obj\Debug\Lab8.csproj.CoreCompileInputs.cache
+C:\Users\kostj\Desktop\Прога 5 сем\Системное программирование\Lab8\Lab8\obj\Debug\Lab8.exe
+C:\Users\kostj\Desktop\Прога 5 сем\Системное программирование\Lab8\Lab8\obj\Debug\Lab8.pdb

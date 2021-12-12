@@ -1,0 +1,4 @@
+﻿  Lab3.cpp
+c:\users\student\desktop\lab3\lab3\lab3\lab3.cpp(4): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+  c:\users\student\desktop\lab3\lab3\lab3\lab3.cpp(4): note: command-line arguments:  see previous definition of '_CRT_SECURE_NO_WARNINGS'
+  Lab3.vcxproj -> C:\Users\student\Desktop\Lab3\Lab3\Debug\Lab3.exe
