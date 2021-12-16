@@ -1,192 +1,242 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
-import random
-from copy import deepcopy
 
 
-plt.figure(figsize=(14, 7))
-plt.subplot(1, 2, 1)
-r1 = 1
-r2 = 3
-
-mx = 10
-t = np.linspace(0, mx, 100)
-num = 15
-for i in range(num):
-    x = np.sin(2*np.pi/num*i)*t
-    y = np.cos(2*np.pi/num*i)*t
-    plt.plot(x, y, c="#0002")
-    
-    x = np.sin(np.pi*t*2/mx)*mx/num*i
-    y = np.cos(np.pi*t*2/mx)*mx/num*i
-    plt.plot(x, y, c="#0002")
-    
-    
-fi = np.linspace(0, 2*np.pi, 100)
-clr = "#99F5"
-for r in np.linspace(r1, r2, 80):
-    x = np.sin(fi)*r
-    y = np.cos(fi)*r
-    plt.plot(x, y, c=clr)
-
-    x = np.sin(fi)*r
-    y = np.cos(fi)*r
-    plt.plot(x, y, c=clr)
-
-plt.ylim(-r2-1,r2+1)
-plt.xlim(-r2-1,r2+1)
-
-plt.subplot(1, 2, 2)
-
-for t in np.linspace(r1, r2, 300):
-    x = np.linspace(0, 2*np.pi, 100)
-    y = x*0+t
-    plt.plot(x, y, clr)
-
-plt.grid()
-plt.ylim(r1-1,r2+1)
-plt.xlim(-1,7)
-#plt.show()
+# Обрёртка над функцией func, делающая ее заданной в ЦСК
+def PolarFunc(func, alpha, r):
+    x = r * np.cos(alpha)
+    y = r * np.sin(alpha)
+    return func(x, y)
 
 
-def f(x, y):
-    return x ** 2 * y ** 2
+# Перевод полярных координат в декартовы
+def ToDecart(alp, r):
+    x = r * np.cos(alp)
+    y = r * np.sin(alp)
+    return x, y
 
 
-def polar_func(func, alpha, r):
-    x = r * np.sin(alpha)
-    y = r * np.cos(alpha)
-    return (func(x, y))
+# Перевод декартовых координат в полярные
+def ToPolar(x, y):
+    r = np.sqrt(x ** 2 + y ** 2)
+    alp = np.arctan(np.abs(y) / np.abs(x)) if x != 0 else np.pi / 2
+    if x * y < 0:
+        alp = np.pi - alp
+    if y < 0:
+        alp = np.pi + alp
+    return alp, r
 
 
-fig = plt.figure(figsize=(10, 10))
-ax = fig.add_subplot(111, projection='3d')
+# получаем пригодные для построения графика массивы координат
+# точек, заданных на кольце r1 <= R <= R2 с заданной дискретностью
+def GetFuncDots(x_steps, y_steps, r1, r2, f):
+    x = []
+    y = []
+    z = []
+    for tx in np.linspace(-r2, r2, x_steps):
+        for ty in np.linspace(-r2, r2, y_steps):
+            if (tx ** 2 + ty ** 2 < r2 ** 2) and (tx ** 2 + ty ** 2 > r1 ** 2):     # проверка на попадание в кольцо
+                x.append(tx)
+                y.append(ty)
+                z.append(f(tx, ty))
+    return x, y, z
 
-r1 = 1
-r2 = 3
-x = []
-y = []
-z = []
-for tx in np.linspace(-r2, r2, 70):
-    for ty in np.linspace(-r2, r2, 70):
-        if (tx**2 + ty**2 < r2**2) and (tx**2 + ty**2 > r1**2):
-            x.append(tx)
-            y.append(ty)
-            z.append(f(tx,ty))
-ax.plot_trisurf(x, y, z, linewidth=0, edgecolors='k', cmap='jet')
 
-#plt.show()
+# Cоздаём исходное разбиение
+def GetTable(a_steps, r_steps, r1, r2, f, dec_graph=False, pol_graph=False):
+    a_steps += 1    # количество точек всегда будет на 1 больше количества отрезков.
+    r_steps += 1
+    table = np.zeros((a_steps, r_steps, 3))     # создаём пустую таблицу нужной размерности
+    i = 0
 
-a_steps = 32
-r_steps = 5
-table = np.zeros((a_steps, r_steps, 3))
-dotlist = []
-i = 0
+    for alpha in np.linspace(0, 2 * np.pi, a_steps, endpoint=True):     # включаем точку 2pi в разбиение
+        j = 0
+        for r in np.linspace(r1, r2, r_steps):
+            table[i][j] = [alpha, r, PolarFunc(f, alpha, r)]            # вычисляем значения в точках и сохраняем
+            j += 1
+        i += 1
 
-for alpha in np.linspace(0, 2 * np.pi, a_steps):
-    j = 0
-    for r in np.linspace(1, 3, r_steps):
-        table[i][j] = [alpha, r, polar_func(f, alpha, r)]
-        dotlist.append([alpha, r, polar_func(f, alpha, r)])
-        j += 1
-    i += 1
+    x, y, z = GetFuncDots(70, 70, r1, r2, f)
+    # график в ДСК
+    if dec_graph:
+        fig = plt.figure(figsize=(10, 10))
+        ax = fig.add_subplot(projection='3d')
+        ax.plot_trisurf(x, y, z, linewidth=0, color="#0003")
+        for dotlist in table:
+            for el in dotlist:
+                out_x, out_y = ToDecart(el[0], el[1])
+                ax.scatter(out_x, out_y, el[2], s=15, color = '#F00')
+        plt.show()
 
-fig = plt.figure(figsize=(10, 10))
-ax = fig.add_subplot(projection='3d')
+    # график в ЦСК
+    if pol_graph:
+        fig = plt.figure(figsize=(10, 10))
+        ax = fig.add_subplot(projection='3d')
+        alp = list()
+        r = list()
+        for i in range(len(x)):
+            talp, tr = ToPolar(x[i], y[i])
+            r.append(tr)
+            alp.append(talp)
+        ax.plot_trisurf(alp, r, z, linewidth=0.1, edgecolors='k', color="#0003")
+        for dotlist in table:
+            for el in dotlist:
+                ax.scatter(el[0], el[1], el[2], s=15, color='#F00')
+        plt.show()
 
-ax.plot_trisurf(x, y, z, linewidth=0, color = "#0003")
+    return table
 
-for el in dotlist:
-    ax.scatter(np.sin(el[0])*el[1], np.cos(el[0])*el[1], el[2], s=15, color = '#F00')
-    # print("[{:5.2f}, {:5.2f}, {:5.2f}] - [{:5.2f}, {:5.2f}, {:5.2f}]".format(el[0], el[1], el[2], np.sin(el[0])*el[1], np.cos(el[0])*el[1], el[2]))
-#plt.show()
 
-fig = plt.figure(figsize=(10, 10))
-ax = fig.add_subplot(projection='3d')
+# Структура решения, содержащая все необходимые данные для вывода статистики и графиков
+class Solution:
+    def __init__(self, functable=None, r1=0, r2=0, asteps=0, rsteps=0):
+        if functable is None:
+            functable = []
+        self.da = 0
+        self.dr = 0
+        self.functable = functable
+        self.r1 = r1
+        self.r2 = r2
+        self.asteps = asteps
+        self.rsteps = rsteps
 
-alp = list()
-r = list()
-for i in range(len(x)):
-    tr = np.sqrt(x[i] ** 2 + y[i] ** 2)
-    r.append(tr)
-    alp.append(np.arcsin(y[i] / tr) + np.pi)
+    # метод, генерирующий таблицу функций интерполяции
+    def solve(self, dot_table, graph=False):
+        self.da = np.abs(dot_table[0][0][0] - dot_table[1][0][0])       # сохраняем в нашу структуру шаги разбиения
+        self.dr = np.abs(dot_table[0][0][1] - dot_table[0][1][1])
+        ax = None
+        if graph:
+            fig = plt.figure(figsize=(10, 10))
+            ax = fig.add_subplot(111, projection='3d')
+        for i in range(dot_table.shape[0] - 1):         # итерируемся по таблице значений
+            tmp = []
+            for j in range(dot_table.shape[1] - 1):
+                tx0 = dot_table[i][j][0]                # получаем коэффициенты для формулы билинейного многочлена
+                tx1 = dot_table[i + 1][j][0]
+                ty0 = dot_table[i][j][1]
+                ty1 = dot_table[i][j + 1][1]
+                tz00 = dot_table[i][j][2]
+                tz01 = dot_table[i][j + 1][2]
+                tz10 = dot_table[i + 1][j][2]
+                tz11 = dot_table[i + 1][j + 1][2]
 
-ax.plot_trisurf(alp, r, z, linewidth=0.1, edgecolors='k', color="#0003")
+                # создаём функцию, интерполирующую текущую область
+                def tmpf(x, y, x1=tx1, x0=tx0, y0=ty0, y1=ty1, z00=tz00, z10=tz10, z01=tz01, z11=tz11):
+                    a = 1/(x1-x0)/(y1-y0)
+                    return a * (z00*(x1-x)*(y1-y) + z10*(x-x0)*(y1-y) + z01*(x1-x)*(y-y0) + z11*(x-x0)*(y-y0))
 
-for el in dotlist:
-    ax.scatter(el[0], el[1], el[2], s=15, color='#F00')
-    # print("[{:5.2f}, {:5.2f}, {:5.2f}] - [{:5.2f}, {:5.2f}, {:5.2f}]".format(el[0], el[1], el[2], np.sin(el[0])*el[1], np.cos(el[0])*el[1], el[2]))
+                if graph:
+                    ttx = np.linspace(tx0, tx1, 10)
+                    tty = np.linspace(ty0, ty1, 10)
+                    ttx, tty = np.meshgrid(ttx, tty)
+                    ttz = tmpf(ttx, tty)
+                    ax.plot_surface(ttx, tty, ttz)          # выводим текущий "лоскуток"
+                tmpf.__name__ += str(i) + str(j)
+                tmp.append(tmpf)                            # сохраняем текущую функцию в список функций
+            self.functable.append(tmp)                  # Сохраняем список функций в список списков.
+            continue                                    # Получаем двумерную таблицу
+        if graph:
+            plt.show()
+        # вывод в декартовых координатах
+        if graph:
+            fig = plt.figure(figsize=(10, 10))
+            ax = fig.add_subplot(111, projection='3d')
+            for i in range(dot_table.shape[0] - 1):
+                for j in range(dot_table.shape[1] - 1):
+                    tx0 = dot_table[i][j][0]
+                    tx1 = dot_table[i + 1][j][0]
+                    ty0 = dot_table[i][j][1]
+                    ty1 = dot_table[i][j + 1][1]
+                    ttx = np.linspace(tx0, tx1, 10)
+                    tty = np.linspace(ty0, ty1, 10)
+                    ttx, tty = np.meshgrid(ttx, tty)
+                    ttz = self.functable[i][j](ttx, tty)
+                    tx, ty = ToDecart(ttx, tty)
+                    ax.plot_surface(tx, ty, ttz)
+            plt.show()
 
-#plt.show()
+    # метод получения одной аппрокс. точки по ее декартовым координатам
+    def get(self, x, y):
+        alp, r = ToPolar(x, y)
+        fnX = int(alp / self.da)            # находим нужный нам индекс по индексу ближайшей сверху слева точки
+        fnY = int((r-self.r1) / self.dr)    # разбиения. Для этого делим координату на шаг и округляем вниз
+        return self.functable[fnX][fnY](alp, r)
 
-fig = plt.figure(figsize=(10, 10))
-ax = fig.add_subplot(projection='3d')
+    # метод для получения набора аппрокс. точек на прямоугольной сетке в ДСК
+    def dots(self, x_steps, y_steps):
+        x = []
+        y = []
+        Iz = []
+        for tx in np.linspace(-self.r2, self.r2, x_steps):
+            for ty in np.linspace(-self.r2, self.r2, y_steps):
+                if (tx ** 2 + ty ** 2 < self.r2 ** 2) and (tx ** 2 + ty ** 2 > self.r1 ** 2):
+                    x.append(tx)
+                    y.append(ty)
+                    Iz.append(self.get(tx, ty))
+        return x, y, Iz
 
-ax.scatter(x, y, z, s=10, color = "#0003")
 
-functable = []
-for i in range(table.shape[0] - 1):
-    tmp = []
-    for j in range(table.shape[1] - 1):
-        tx0 = table[i][j][0]
-        tx1 = table[i+1][j][0]
-        ty0 = table[i][j][1]
-        ty1 = table[i][j+1][1]
-        tz00 = table[i][j][2]
-        tz01 = table[i][j+1][2]
-        tz10 = table[i+1][j][2]
-        tz11 = table[i+1][j+1][2]
-        def tmpf(x, y, x1 = tx1, x0 = tx0, y0 = ty0, y1 = ty1, z00 = tz00, z10 = tz10, z01 = tz01, z11 = tz11):
-            a = 1/(x1-x0)/(y1-y0)
-            return a * (z00*(x1-x)*(y1-y) + z10*(x-x0)*(y1-y) + z01*(x1-x)*(y-y0) + z11*(x-x0)*(y-y0))
-        ttx = np.linspace(tx0, tx1, 10)
-        tty = np.linspace(ty0, ty1, 10)
-        ttx, tty = np.meshgrid(ttx, tty)
-        ttz = tmpf(ttx, tty)
-        ax.plot_surface(np.cos(ttx)*tty, np.sin(ttx)*tty, ttz)
-        tmp.append(tmpf)
-    functable.append(tmp)
-    
-#plt.show()
+# Функция вывода значений функции и разницы между ними. Также нахождение максимума погрешности
+def PrintStats(true_values, mine_values, every_num=1):
+    deltas = []
+    print("  F(x,y)   | MineF(x,y) |      Delta(x,y)      ")
+    print("===============================================")
+    for i in range(len(true_values)):
+            delt = np.abs(true_values[i] - mine_values[i])
+            deltas.append(delt)
+            if i % every_num == 0:
+                print("%10.4f | %10.4f | %20.15f" % (true_values[i], mine_values[i], delt))
 
-def GetZ(fntable, table, x, y):
-    alp = np.arctan(y/x) + np.pi/2 if x!=0 else 0
-    r = np.sqrt(x**2 + y**2)
-    fnX = fnY = 0
-    breaker = False
-    for i in range(table.shape[0]):
-        if alp < table[i][0][0]:
-            for j in range(table.shape[1]):
-                if r < table[i-1][j][1]:
-                    fnX = i-1
-                    fnY = j-1
-                    breaker = True
-                    break
-        if breaker:
-            break
-    return fntable[fnX][fnY](alp, r)
+    mx = np.max(deltas)
+    print("Максимум погрешности: ", mx)
+    return deltas
 
-x = 2
-y = 2
-print(f(x,y))
-print(GetZ(functable, table, x, y))
 
-fig = plt.figure(figsize=(10, 10))
-ax = fig.add_subplot(projection='3d')
+#####################
+# Начальные условия #
 
-x = []
-y = []
-z = []
-Iz = []
-for tx in np.linspace(-r2, r2, 70):
-    for ty in np.linspace(-r2, r2, 70):
-        if (tx**2 + ty**2 < r2**2) and (tx**2 + ty**2 > r1**2):
-            x.append(tx)
-            y.append(ty)
-            z.append(f(tx,ty))
-            Iz.append(GetZ(functable, table, tx, ty))
-ax.scatter(x, y, z, s=5, c="#000000")
-ax.scatter(x, y, Iz, s=5, c="#58F")
 
-plt.show()
+def F(x, y):
+    return x**2 * y**2
+
+
+R1 = 1
+R2 = 3
+
+A_steps = 32
+R_steps = 4
+
+graph = False
+
+# выводим график исходной функции
+if graph:
+    fig = plt.figure(figsize=(10, 10))
+    ax = fig.add_subplot(111, projection='3d')
+    x, y, z = GetFuncDots(70, 70, R1, R2, F)
+    ax.plot_trisurf(x, y, z, linewidth=0, edgecolors='k', cmap='jet')
+    plt.show()
+
+tbl = GetTable(A_steps, R_steps, R1, R2, F, graph, graph)       # получаем разбиение
+sln = Solution(r1=R1, r2=R2, asteps=A_steps, rsteps=R_steps)    # создаём экземпляр класса решения
+sln.solve(tbl, graph)                                           # решаем
+_, _, Iz = sln.dots(50, 50)                                     # получаем значения 50х50 аппрокс. точек
+x, y, z = GetFuncDots(50, 50, R1, R2, F)                        # -//- точек исходной функции
+
+# поточечный итоговый график
+if graph:
+    fig = plt.figure(figsize=(10, 10))
+    ax = fig.add_subplot(projection='3d')
+    ax.scatter(x, y, z, s=5, c="#0009")
+    ax.scatter(x, y, Iz, s=5, c="#58F")
+    plt.show()
+
+deltas = PrintStats(z, Iz, 100)
+
+# график погрешности
+if graph:
+    fig = plt.figure(figsize=(10, 10))
+    ax = fig.add_subplot(projection='3d')
+    ax.scatter(x, y, z, s=5, c="#0001")
+    ax.scatter(x, y, Iz, s=5, c="#58F1")
+    ax.plot_trisurf(x, y, deltas, linewidth=0, edgecolors='k', cmap='jet')
+    plt.show()
