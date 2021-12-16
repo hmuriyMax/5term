@@ -12,100 +12,80 @@ namespace lab7
 {
     public partial class Form1 : Form
     {
-        private int num = 0, i = 0, j = 18;
-        private bool show = false, showText = false;
-        private Bitmap[] btms = new Bitmap[4];
-        private string[] strs = new string[4];
+        private int img_num = 0, i = 0, j = 18, w = 660, h = 440;
+        private Bitmap map1 = new Bitmap("china1.bmp");
+        private Bitmap map2 = new Bitmap("china2.bmp");
+        private Bitmap map3 = new Bitmap("china3.bmp");
+        private string str = "China wall";
         Graphics pic;
+
         public Form1()
         {
             InitializeComponent();
-    }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            pic = pictureBox1.CreateGraphics();
-            btms[0] = new Bitmap("IMG_0615.bmp");
-            btms[1] = new Bitmap("IMG_0667.bmp");
-            btms[2] = new Bitmap("IMG_0741.bmp");
-            btms[3] = new Bitmap("IMG_0777.bmp");
-            strs[0] = "The Devil";
-            strs[1] = "Nasty darkness";
-            strs[2] = "Perovo at night";
-            strs[3] = "Fitness";
-            show = true;
-            showText = true;
-            button3.Enabled = false;
+            FormLoad();
+            button1_Click(null, null);
         }
 
-        private void Form1_Paint(object sender, PaintEventArgs e)
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            if (show)
-                ShowImage();
-            if (showText)
-                ShowText();
+            ShowImage();
+        }
+
+        public void FormLoad()
+        {
+            pic = pictureBox1.CreateGraphics();
+            ShowImage();
         }
 
         private void ShowImage()
         {
-            pic.DrawImage(btms[num-1 < 0 ? 3 : num-1], -660 + i, 0, 660, 440);
-            pic.DrawImage(btms[num], 0 + i, 0, 660, 440);
-            pic.DrawImage(btms[(num+1) % 4], 660 + i, 0, 660, 440);
-        }
-
-        private void ShowText()
-        {
-            Font aFont = new Font("Cambira", j + 1, FontStyle.Bold);
-            pic.DrawString(strs[num], aFont, Brushes.White, 5, 400);
+            Bitmap map;
+            bool txt = false;
+            switch (img_num)
+            {
+                case 1:
+                    map = map2;
+                    txt = false;
+                    break;
+                case 2:
+                    map = map3;
+                    txt = false;
+                    break;
+                default:
+                    map = map1;
+                    txt = true;
+                    break;
+            }
+            pic.DrawImage(map, j , 0, i, h);
+            if (txt && i == w)
+            {
+                Font aFont = new Font("Cambira", 15, FontStyle.Bold);
+                pic.DrawString(str, aFont, Brushes.White, 5, 400);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (show)
+            j = 0;
+            for (i = 0; i <= w; i += 30)
             {
-                showText = false;
-                for (i = 0; i >= -660; i -= 30)
-                {
-                    ShowImage();
-                }
-                num++;
-                num = num % 4;
-                i = 0;
                 ShowImage();
-                showText = true;
-                for (j = 0; j <= 17; j+=2)
-                {
-                    ShowImage();
-                    ShowText();
-                    System.Threading.Thread.Sleep(30);
-                }
-                ShowImage(); 
-                ShowText();
             }
+            img_num++;
+            img_num = img_num % 3;
+            i = 0;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (show)
-            {
-                showText = false;
-                for (i = 0; i <= 660; i += 30)
+                for (i = 0; i <= w; i += 30)
                 {
+                    j = 660-i;
                     ShowImage();
                 }
-                num--;
-                num = num < 0 ? 3 : num;
+                img_num--;
+                img_num = img_num < 0 ? 2 : img_num;
                 i = 0;
-                ShowImage();
-                showText = true;
-                for (j = 0; j <= 17; j++)
-                {
-                    ShowText();
-                    System.Threading.Thread.Sleep(15);
-                }
-                ShowImage();
-                ShowText();
-            }
         }
     }
 }

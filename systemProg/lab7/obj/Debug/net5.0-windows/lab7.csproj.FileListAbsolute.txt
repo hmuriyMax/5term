@@ -16,3 +16,4 @@ C:\prog\5term\systemProg\lab7\obj\Debug\net5.0-windows\lab7.dll
 C:\prog\5term\systemProg\lab7\obj\Debug\net5.0-windows\ref\lab7.dll
 C:\prog\5term\systemProg\lab7\obj\Debug\net5.0-windows\lab7.pdb
 C:\prog\5term\systemProg\lab7\obj\Debug\net5.0-windows\lab7.genruntimeconfig.cache
+C:\prog\5term\systemProg\lab7\obj\Debug\net5.0-windows\lab7.Properties.Resources.resources
