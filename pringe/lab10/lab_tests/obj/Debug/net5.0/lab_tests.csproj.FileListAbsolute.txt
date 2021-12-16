@@ -1,0 +1,12 @@
+C:\prog\5term\pringe\lab_tests\bin\Debug\net5.0\lab_tests.deps.json
+C:\prog\5term\pringe\lab_tests\bin\Debug\net5.0\lab_tests.dll
+C:\prog\5term\pringe\lab_tests\bin\Debug\net5.0\ref\lab_tests.dll
+C:\prog\5term\pringe\lab_tests\bin\Debug\net5.0\lab_tests.pdb
+C:\prog\5term\pringe\lab_tests\obj\Debug\net5.0\lab_tests.csproj.AssemblyReference.cache
+C:\prog\5term\pringe\lab_tests\obj\Debug\net5.0\lab_tests.GeneratedMSBuildEditorConfig.editorconfig
+C:\prog\5term\pringe\lab_tests\obj\Debug\net5.0\lab_tests.AssemblyInfoInputs.cache
+C:\prog\5term\pringe\lab_tests\obj\Debug\net5.0\lab_tests.AssemblyInfo.cs
+C:\prog\5term\pringe\lab_tests\obj\Debug\net5.0\lab_tests.csproj.CoreCompileInputs.cache
+C:\prog\5term\pringe\lab_tests\obj\Debug\net5.0\lab_tests.dll
+C:\prog\5term\pringe\lab_tests\obj\Debug\net5.0\ref\lab_tests.dll
+C:\prog\5term\pringe\lab_tests\obj\Debug\net5.0\lab_tests.pdb
