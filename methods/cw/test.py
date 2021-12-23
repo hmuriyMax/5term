@@ -1,3 +1,4 @@
+from datetime import datetime
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -35,7 +36,7 @@ def GetFuncDots(x_steps, y_steps, r1, r2, f):
     z = []
     for tx in np.linspace(-r2, r2, x_steps):
         for ty in np.linspace(-r2, r2, y_steps):
-            if (tx ** 2 + ty ** 2 < r2 ** 2) and (tx ** 2 + ty ** 2 > r1 ** 2):     # проверка на попадание в кольцо
+            if (tx ** 2 + ty ** 2 < r2 ** 2) and (tx ** 2 + ty ** 2 > r1 ** 2):  # проверка на попадание в кольцо
                 x.append(tx)
                 y.append(ty)
                 z.append(f(tx, ty))
@@ -44,15 +45,15 @@ def GetFuncDots(x_steps, y_steps, r1, r2, f):
 
 # Cоздаём исходное разбиение
 def GetTable(a_steps, r_steps, r1, r2, f, dec_graph=False, pol_graph=False):
-    a_steps += 1    # количество точек всегда будет на 1 больше количества отрезков.
+    a_steps += 1  # количество точек всегда будет на 1 больше количества отрезков.
     r_steps += 1
-    table = np.zeros((a_steps, r_steps, 3))     # создаём пустую таблицу нужной размерности
+    table = np.zeros((a_steps, r_steps, 3))  # создаём пустую таблицу нужной размерности
     i = 0
 
-    for alpha in np.linspace(0, 2 * np.pi, a_steps, endpoint=True):     # включаем точку 2pi в разбиение
+    for alpha in np.linspace(0, 2 * np.pi, a_steps, endpoint=True):  # включаем точку 2pi в разбиение
         j = 0
         for r in np.linspace(r1, r2, r_steps):
-            table[i][j] = [alpha, r, PolarFunc(f, alpha, r)]            # вычисляем значения в точках и сохраняем
+            table[i][j] = [alpha, r, PolarFunc(f, alpha, r)]  # вычисляем значения в точках и сохраняем
             j += 1
         i += 1
 
@@ -65,7 +66,7 @@ def GetTable(a_steps, r_steps, r1, r2, f, dec_graph=False, pol_graph=False):
         for dotlist in table:
             for el in dotlist:
                 out_x, out_y = ToDecart(el[0], el[1])
-                ax.scatter(out_x, out_y, el[2], s=15, color = '#F00')
+                ax.scatter(out_x, out_y, el[2], s=15, color='#F00')
         plt.show()
 
     # график в ЦСК
@@ -102,16 +103,16 @@ class Solution:
 
     # метод, генерирующий таблицу функций интерполяции
     def solve(self, dot_table, graph=False):
-        self.da = np.abs(dot_table[0][0][0] - dot_table[1][0][0])       # сохраняем в нашу структуру шаги разбиения
+        self.da = np.abs(dot_table[0][0][0] - dot_table[1][0][0])  # сохраняем в нашу структуру шаги разбиения
         self.dr = np.abs(dot_table[0][0][1] - dot_table[0][1][1])
         ax = None
         if graph:
             fig = plt.figure(figsize=(10, 10))
             ax = fig.add_subplot(111, projection='3d')
-        for i in range(dot_table.shape[0] - 1):         # итерируемся по таблице значений
+        for i in range(dot_table.shape[0] - 1):  # итерируемся по таблице значений
             tmp = []
             for j in range(dot_table.shape[1] - 1):
-                tx0 = dot_table[i][j][0]                # получаем коэффициенты для формулы билинейного многочлена
+                tx0 = dot_table[i][j][0]  # получаем коэффициенты для формулы билинейного многочлена
                 tx1 = dot_table[i + 1][j][0]
                 ty0 = dot_table[i][j][1]
                 ty1 = dot_table[i][j + 1][1]
@@ -122,19 +123,20 @@ class Solution:
 
                 # создаём функцию, интерполирующую текущую область
                 def tmpf(x, y, x1=tx1, x0=tx0, y0=ty0, y1=ty1, z00=tz00, z10=tz10, z01=tz01, z11=tz11):
-                    a = 1/(x1-x0)/(y1-y0)
-                    return a * (z00*(x1-x)*(y1-y) + z10*(x-x0)*(y1-y) + z01*(x1-x)*(y-y0) + z11*(x-x0)*(y-y0))
+                    a = 1 / (x1 - x0) / (y1 - y0)
+                    return a * (z00 * (x1 - x) * (y1 - y) + z10 * (x - x0) * (y1 - y) + z01 * (x1 - x) * (
+                                y - y0) + z11 * (x - x0) * (y - y0))
 
                 if graph:
                     ttx = np.linspace(tx0, tx1, 10)
                     tty = np.linspace(ty0, ty1, 10)
                     ttx, tty = np.meshgrid(ttx, tty)
                     ttz = tmpf(ttx, tty)
-                    ax.plot_surface(ttx, tty, ttz)          # выводим текущий "лоскуток"
+                    ax.plot_surface(ttx, tty, ttz)  # выводим текущий "лоскуток"
                 tmpf.__name__ += str(i) + str(j)
-                tmp.append(tmpf)                            # сохраняем текущую функцию в список функций
-            self.functable.append(tmp)                  # Сохраняем список функций в список списков.
-            continue                                    # Получаем двумерную таблицу
+                tmp.append(tmpf)  # сохраняем текущую функцию в список функций
+            self.functable.append(tmp)  # Сохраняем список функций в список списков.
+            continue  # Получаем двумерную таблицу
         if graph:
             plt.show()
         # вывод в декартовых координатах
@@ -158,8 +160,8 @@ class Solution:
     # метод получения одной аппрокс. точки по ее декартовым координатам
     def get(self, x, y):
         alp, r = ToPolar(x, y)
-        fnX = int(alp / self.da)            # находим нужный нам индекс по индексу ближайшей сверху слева точки
-        fnY = int((r-self.r1) / self.dr)    # разбиения. Для этого делим координату на шаг и округляем вниз
+        fnX = int(alp / self.da)  # находим нужный нам индекс по индексу ближайшей сверху слева точки
+        fnY = int((r - self.r1) / self.dr)  # разбиения. Для этого делим координату на шаг и округляем вниз
         return self.functable[fnX][fnY](alp, r)
 
     # метод для получения набора аппрокс. точек на прямоугольной сетке в ДСК
@@ -177,18 +179,20 @@ class Solution:
 
 
 # Функция вывода значений функции и разницы между ними. Также нахождение максимума погрешности
-def PrintStats(true_values, mine_values, every_num=1):
+def GetStats(true_values, mine_values, every_num=1, prints=False):
     deltas = []
-    print("  F(x,y)   | MineF(x,y) |      Delta(x,y)      ")
-    print("===============================================")
+    if prints:
+        print("  F(x,y)   | MineF(x,y) |      Delta(x,y)      ")
+        print("===============================================")
     for i in range(len(true_values)):
-            delt = np.abs(true_values[i] - mine_values[i])
-            deltas.append(delt)
-            if i % every_num == 0:
-                print("%10.4f | %10.4f | %20.15f" % (true_values[i], mine_values[i], delt))
+        delt = np.abs(true_values[i] - mine_values[i])
+        deltas.append(delt)
+        if prints and i % every_num == 0:
+            print("%10.4f | %10.4f | %20.15f" % (true_values[i], mine_values[i], delt))
 
-    mx = np.max(deltas)
-    print("Максимум погрешности: ", mx)
+    if prints:
+        mx = np.max(deltas)
+        print("Максимум погрешности: ", mx)
     return deltas
 
 
@@ -197,11 +201,11 @@ def PrintStats(true_values, mine_values, every_num=1):
 
 
 def F(x, y):
-    return x**2 * y**2
+    return x*y * np.sin(x**2 + y**2)
 
 
-R1 = 1
-R2 = 3
+R1 = 0
+R2 = 5
 
 A_steps = 32
 R_steps = 4
@@ -216,11 +220,11 @@ if graph:
     ax.plot_trisurf(x, y, z, linewidth=0, edgecolors='k', cmap='jet')
     plt.show()
 
-tbl = GetTable(A_steps, R_steps, R1, R2, F, graph, graph)       # получаем разбиение
-sln = Solution(r1=R1, r2=R2, asteps=A_steps, rsteps=R_steps)    # создаём экземпляр класса решения
-sln.solve(tbl, graph)                                           # решаем
-_, _, Iz = sln.dots(50, 50)                                     # получаем значения 50х50 аппрокс. точек
-x, y, z = GetFuncDots(50, 50, R1, R2, F)                        # -//- точек исходной функции
+tbl = GetTable(A_steps, R_steps, R1, R2, F, graph, graph)  # получаем разбиение
+sln = Solution(r1=R1, r2=R2, asteps=A_steps, rsteps=R_steps)  # создаём экземпляр класса решения
+sln.solve(tbl, graph)  # решаем
+_, _, Iz = sln.dots(50, 50)  # получаем значения 50х50 аппрокс. точек
+x, y, z = GetFuncDots(50, 50, R1, R2, F)  # -//- точек исходной функции
 
 # поточечный итоговый график
 if graph:
@@ -230,7 +234,7 @@ if graph:
     ax.scatter(x, y, Iz, s=5, c="#58F")
     plt.show()
 
-deltas = PrintStats(z, Iz, 100)
+deltas = GetStats(z, Iz, 100, graph)
 
 # график погрешности
 if graph:
@@ -240,3 +244,62 @@ if graph:
     ax.scatter(x, y, Iz, s=5, c="#58F1")
     ax.plot_trisurf(x, y, deltas, linewidth=0, edgecolors='k', cmap='jet')
     plt.show()
+
+# вывод данных о зависимости погрешности от разбиения
+a_start = 1
+a_finish = 100
+a_nstep = 20
+
+r_start = 1
+r_finish = 100
+r_nstep = 20
+
+alps = np.linspace(a_start, a_finish, a_nstep)
+rads = np.linspace(r_start, r_finish, r_nstep)
+
+gralps = []
+grrads = []
+deltas = []
+gtimes = []
+
+start_time = datetime.now()
+
+i = 0
+for alp in alps:
+    alp = int(alp)
+    j = 0
+    for rad in rads:
+        rad = int(rad)
+        stime = datetime.now()
+        tbl = GetTable(alp, rad, R1, R2, F, False, False)  # получаем разбиение
+        sln = Solution(r1=R1, r2=R2, asteps=alp, rsteps=rad)  # создаём экземпляр класса решения
+        sln.solve(tbl, False)  # решаем
+        _, _, Iz = sln.dots(50, 50)  # получаем значения 50х50 аппрокс. точек
+        x, y, z = GetFuncDots(50, 50, R1, R2, F)
+        time = datetime.now() - stime
+        gralps.append(alp)
+        grrads.append(rad)
+        deltas.append(np.log10(np.max(GetStats(z, Iz))))
+        gtimes.append(time.microseconds)
+        j += 1
+    i += 1
+
+print("Затрачено времени: ", datetime.now() - start_time)
+print("(среди разбиений)\nМинимальная погрешность: ", np.min(np.power(10, deltas)))
+print("Максимальная погрешность: ", np.max(np.power(10, deltas)))
+
+# вывод графика зависимости погрешности от разбиения
+fig = plt.figure(figsize=(10, 10))
+ax = fig.add_subplot(projection='3d')
+ax.set_xlabel('отрезков разбиения по углу')
+ax.set_ylabel('отрезков разбиения по радиусу')
+ax.plot_trisurf(gralps, grrads, deltas, linewidth=0, edgecolors='k', cmap='jet')
+plt.show()
+
+# вывод графика зависимости времени от разбиения
+fig = plt.figure(figsize=(10, 10))
+ax = fig.add_subplot(projection='3d')
+ax.set_xlabel('отрезков разбиения по углу')
+ax.set_ylabel('отрезков разбиения по радиусу')
+ax.plot_trisurf(gralps, grrads, gtimes, linewidth=0, edgecolors='k', cmap='rainbow')
+plt.show()
