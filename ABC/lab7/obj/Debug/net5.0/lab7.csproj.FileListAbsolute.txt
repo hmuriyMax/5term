@@ -1,0 +1,16 @@
+C:\prog\5term\ABC\lab7\bin\Debug\net5.0\lab7.exe
+C:\prog\5term\ABC\lab7\bin\Debug\net5.0\lab7.deps.json
+C:\prog\5term\ABC\lab7\bin\Debug\net5.0\lab7.runtimeconfig.json
+C:\prog\5term\ABC\lab7\bin\Debug\net5.0\lab7.runtimeconfig.dev.json
+C:\prog\5term\ABC\lab7\bin\Debug\net5.0\lab7.dll
+C:\prog\5term\ABC\lab7\bin\Debug\net5.0\ref\lab7.dll
+C:\prog\5term\ABC\lab7\bin\Debug\net5.0\lab7.pdb
+C:\prog\5term\ABC\lab7\obj\Debug\net5.0\lab7.csproj.AssemblyReference.cache
+C:\prog\5term\ABC\lab7\obj\Debug\net5.0\lab7.GeneratedMSBuildEditorConfig.editorconfig
+C:\prog\5term\ABC\lab7\obj\Debug\net5.0\lab7.AssemblyInfoInputs.cache
+C:\prog\5term\ABC\lab7\obj\Debug\net5.0\lab7.AssemblyInfo.cs
+C:\prog\5term\ABC\lab7\obj\Debug\net5.0\lab7.csproj.CoreCompileInputs.cache
+C:\prog\5term\ABC\lab7\obj\Debug\net5.0\lab7.dll
+C:\prog\5term\ABC\lab7\obj\Debug\net5.0\ref\lab7.dll
+C:\prog\5term\ABC\lab7\obj\Debug\net5.0\lab7.pdb
+C:\prog\5term\ABC\lab7\obj\Debug\net5.0\lab7.genruntimeconfig.cache

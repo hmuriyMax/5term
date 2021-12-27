@@ -90,7 +90,7 @@ def GetTable(a_steps, r_steps, r1, r2, f, dec_graph=False, pol_graph=False):
 
 # Структура решения, содержащая все необходимые данные для вывода статистики и графиков
 class Solution:
-    def __init__(self, functable=None, r1=0, r2=0, asteps=0, rsteps=0):
+    def __init__(self, functable=None, r1=0.0, r2=0.0, asteps=0, rsteps=0):
         if functable is None:
             functable = []
         self.da = 0
@@ -201,11 +201,11 @@ def GetStats(true_values, mine_values, every_num=1, prints=False):
 
 
 def F(x, y):
-    return x*y * np.sin(x**2 + y**2)
+    return y*(x**2 + y**2)**3
 
 
 R1 = 0
-R2 = 5
+R2 = 10
 
 A_steps = 32
 R_steps = 4
@@ -254,8 +254,8 @@ r_start = 1
 r_finish = 100
 r_nstep = 20
 
-alps = np.linspace(a_start, a_finish, a_nstep)
-rads = np.linspace(r_start, r_finish, r_nstep)
+alps = np.linspace(a_start, a_finish, a_nstep, endpoint=True)
+rads = np.linspace(r_start, r_finish, r_nstep, endpoint=True)
 
 gralps = []
 grrads = []
