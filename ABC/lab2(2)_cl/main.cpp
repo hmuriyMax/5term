@@ -35,6 +35,8 @@ char getNumberOf16ric(int num){
 
 string conv_from_10(double given, int newbase, int prec = -1) {
     string res;
+    bool minus = given<0;
+    given = abs(given);
     int int_part = int(given);
     double rel_part = given - int_part;
     if (prec < 0)
@@ -52,6 +54,8 @@ string conv_from_10(double given, int newbase, int prec = -1) {
         char c = getNumberOf16ric(num);
         res += c;
     }
+    if (minus)
+        res = "-" + res;
     return res;
 }
 
@@ -147,15 +151,15 @@ string mult(const string& lhs, const string& rhs) {
     tmp2 = rhs;
     int real_part2 = int(tmp2.substr(tmp2.find('.')+1).length());
 
-    int dif = abs(real_part2 - real_part1);
-    string concat;
-    for (int i = 0; i < dif; i++){
-        concat += "0";
+    bool m1 = false, m2 = false;
+    if (tmp1[0] == '-'){
+        tmp1 = eraser(tmp1, '-');
+        m1 = true;
     }
-    if (real_part1 > real_part2){
-        tmp2 += concat;
-    } else {
-        tmp1 += concat;
+
+    if (tmp2[0] == '-'){
+        tmp2 = eraser(tmp2, '-');
+        m2 = true;
     }
 
     vector<string> sums;
@@ -183,18 +187,31 @@ string mult(const string& lhs, const string& rhs) {
     for (int i = len-1; i >= len - rpart; i--)
         tmpsum[i] = tmpsum[i-1];
     tmpsum[len-rpart-1] = '.';
+
+    if (m1 xor m2){
+        tmpsum = "-" + tmpsum;
+    }
+
     return tmpsum.substr(0, tmpsum.find('.') + 1 + max(real_part1, real_part2));
 }
 
 double conv_to_10(const string& str, int base) {
+    bool minus = false;
     int powr = int(str.find('.')) - 1;
+    if (str[0] == '-'){
+        minus = true;
+        powr--;
+    }
     double res = 0.0;
     for (char i : str){
-        if (i == '.')
+        if (i == '.' || i == '-')
             continue;
         res += getIndexOf16ric(i) * pow(base, powr);
         powr--;
     }
+    if (minus)
+        res *= -1;
+
     return res;
 }
 
